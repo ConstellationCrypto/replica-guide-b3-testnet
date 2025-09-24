@@ -26,3 +26,6 @@ Commands:
     make b3-down
 
     make b3-clean
+
+# Celestia upgrades
+Please refer to celestia docs for network upgrades: https://docs.celestia.org/how-to-guides/participate#network-upgrades
