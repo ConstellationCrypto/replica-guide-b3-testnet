@@ -1,0 +1,82 @@
+# ==============================================================================
+# Stateless DA Server Configuration (B3 testnet replica)
+# ==============================================================================
+#
+# Configure Celestia bridge/core gRPC endpoints and signing before starting.
+# See https://github.com/celestiaorg/op-alt-da
+#
+# ==============================================================================
+
+addr = "0.0.0.0"
+port = 3100
+log_level = "info"
+log_format = "text"
+
+read_timeout = "30s"
+write_timeout = "120s"
+idle_timeout = "60s"
+
+# ==============================================================================
+# CELESTIA CONFIGURATION
+# ==============================================================================
+
+[celestia]
+keyring_backend = "awskms"
+namespace = "00000000000000000000000000000000000000ca1de12ac5a629c3c42f"
+blobid_compact = true
+
+bridge_addr = "https://serene-restless-sponge.celestia-mocha.quiknode.pro/REPLACE_BY_RUNNER"
+bridge_auth_token = "REPLACE_BY_RUNNER"
+bridge_tls_enabled = true
+
+core_grpc_addr = "serene-restless-sponge.celestia-mocha.quiknode.pro:9090"
+core_grpc_auth_token = "REPLACE_BY_RUNNER"
+core_grpc_tls_enabled = true
+
+default_key_name = "REPLACE"
+p2p_network = "mocha-4"
+tx_worker_accounts = 0
+
+[celestia.awskms]
+region = "us-west-2"
+
+# ==============================================================================
+# SUBMISSION CONFIGURATION
+# ==============================================================================
+
+[submission]
+timeout = "60s"
+tx_priority = 2
+max_blob_size = "2MB"
+
+# ==============================================================================
+# READ CONFIGURATION
+# ==============================================================================
+
+[read]
+timeout = "30s"
+
+# ==============================================================================
+# METRICS CONFIGURATION
+# ==============================================================================
+
+[metrics]
+enabled = true
+port = 6060
+
+# ==============================================================================
+# FALLBACK STORAGE (S3)
+# ==============================================================================
+
+[fallback]
+enabled = true
+provider = "s3"
+mode = "both"
+
+[fallback.s3]
+bucket = "caldera-celestia-cache-staging"
+prefix = "00000000000000000000000000000000000000ca1de12ac5a629c3c42f"
+endpoint = ""
+region = "us-west-2"
+credential_type = "iam"
+timeout = "60s"
