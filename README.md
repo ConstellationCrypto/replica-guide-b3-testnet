@@ -49,10 +49,12 @@ Edit [op-alt-da-config.toml](op-alt-da-config.toml): set Celestia bridge/core gR
 
 ### Run
 
+`L1_RPC_URL` is required (Compose substitutes it into `OP_NODE_L1_ETH_RPC`). Without it, op-node fails with `open : no such file or directory`.
+
 ```bash
-export L1_RPC_URL=<base-sepolia-rpc>
+cp .env.example .env   # set L1_RPC_URL
 make b3-reth-up
-# or: docker compose -f docker-compose-reth.yml up -d
+# or: export L1_RPC_URL=<base-sepolia-rpc> && docker compose -f docker-compose-reth.yml up -d
 ```
 
 Rollup sync status (default op-node port `27545`):

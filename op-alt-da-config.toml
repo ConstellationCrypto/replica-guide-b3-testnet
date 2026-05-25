@@ -21,24 +21,24 @@ idle_timeout = "60s"
 # ==============================================================================
 
 [celestia]
-keyring_backend = "awskms"
+#keyring_backend = "awskms"
 namespace = "00000000000000000000000000000000000000ca1de12ac5a629c3c42f"
 blobid_compact = true
 
-bridge_addr = "https://serene-restless-sponge.celestia-mocha.quiknode.pro/REPLACE_BY_RUNNER"
-bridge_auth_token = "REPLACE_BY_RUNNER"
+bridge_addr = "https://serene-restless-sponge.celestia-mocha.quiknode.pro/REPLACE"
+bridge_auth_token = "REPLACE"
 bridge_tls_enabled = true
 
 core_grpc_addr = "serene-restless-sponge.celestia-mocha.quiknode.pro:9090"
-core_grpc_auth_token = "REPLACE_BY_RUNNER"
+core_grpc_auth_token = "REPLACE"
 core_grpc_tls_enabled = true
 
-default_key_name = "REPLACE"
+#default_key_name = "REPLACE"
 p2p_network = "mocha-4"
 tx_worker_accounts = 0
 
-[celestia.awskms]
-region = "us-west-2"
+#[celestia.awskms]
+#region = "us-west-2"
 
 # ==============================================================================
 # SUBMISSION CONFIGURATION

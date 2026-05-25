@@ -2,10 +2,19 @@
 
 set -eu
 
+if [ -f .env ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env
+  set +a
+fi
+
 if [ -z "${L1_RPC_URL:-}" ]; then
-  echo "Set L1_RPC_URL (Base Sepolia RPC) before starting." >&2
+  echo "Set L1_RPC_URL in the environment or in .env (see .env.example)." >&2
   exit 1
 fi
+
+export L1_RPC_URL
 
 if [ ! -f jwt-secret.txt ]; then
   openssl rand -hex 32 > jwt-secret.txt

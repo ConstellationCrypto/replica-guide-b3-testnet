@@ -64,11 +64,12 @@ services:
     volumes:
       - "${PWD}/op-alt-da-config.toml:/config.toml:ro"
     command:
-      - ./usr/local/bin/da-server
-      - --config=/config.toml
-    # AWS KMS signing (see op-alt-da-config.toml [celestia.awskms]); use IAM role or env creds.
+      - --config
+      - /config.toml    # AWS KMS signing (see op-alt-da-config.toml [celestia.awskms]); use IAM role or env creds.
     environment:
       AWS_REGION: ${AWS_REGION:-us-west-2}
+      OP_ALTDA_CONFIG: /config.toml
+      OP_ALTDA_CELESTIA_NAMESPACE: "00000000000000000000000000000000000000ca1de12ac5a629c3c42f"
 
   op-node:
     depends_on:
@@ -87,6 +88,7 @@ services:
       OP_NODE_ALTDA_DA_SERVER: "http://op-alt-da:3100"
       OP_NODE_ALTDA_DA_SERVICE: "true"
       OP_NODE_ALTDA_VERIFY_ON_READ: "true"
+      OP_NODE_ROLLUP_L1_CHAIN_CONFIG: '/l1_chain_config.json'
     command: >
       op-node
       --l1="${L1_RPC_URL}"
@@ -118,5 +120,6 @@ services:
     volumes:
       - "${PWD}/p2p-node-key.txt:/config/p2p-node-key.txt"
       - "${PWD}/jwt-secret.txt:/config/jwt-secret.txt"
-      - "${PWD}/b3-testnet-rollup.json:/rollup.json"
+      - "${PWD}/b3-testnet-rollup.json:/rollup.json:ro"
+      - "${PWD}/l1_chain_config.json:/l1_chain_config.json:ro"
       - op_log:/op_log
