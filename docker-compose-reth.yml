@@ -28,7 +28,7 @@ services:
       - "0.0.0.0:${OP_RETH_WS_PORT:-18546}:8546"
       - "0.0.0.0:${OP_RETH_ENGINE_PORT:-18551}:8551"
     volumes:
-      - "${PWD}/b3-testnet-reth-datadir:/root/datadir"
+      - "${PWD}/reth_data:/root/datadir"
       - "${PWD}/jwt-secret.txt:/config/jwt.txt:ro"
       - "${PWD}/b3-testnet-genesis.json:/config/genesisReth.json:ro"
     command: >
@@ -55,7 +55,7 @@ services:
       --chain=/config/genesisReth.json
 
   op-alt-da:
-    image: public.ecr.aws/i6b2w2n6/op-alt-da:v0.12.0
+    image: public.ecr.aws/i6b2w2n6/op-alt-da:v0.12.0-anon
     platform: linux/amd64
     restart: always
     ports:
